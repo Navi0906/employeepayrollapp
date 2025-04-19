@@ -1,36 +1,25 @@
 package com.bridgelabz.employeepayroll.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.Fetch;
+
+
+import java.util.List;
 
 @Entity
+@Data
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long employeeId;
     private String name;
     private Double salary;
+    private String gender;
 
-    public long getEmployeeId() {
-        return employeeId;
-    }
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name="employee_department", joinColumns = @JoinColumn)
+    @Column(name="department")
+    public List<String> departments;
 
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
 }

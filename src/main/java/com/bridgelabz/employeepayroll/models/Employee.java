@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.Fetch;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -16,10 +17,12 @@ public class Employee {
     private String name;
     private Double salary;
     private String gender;
+    private LocalDate dob;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="employee_department", joinColumns = @JoinColumn)
     @Column(name="department")
     public List<String> departments;
+
 
 }

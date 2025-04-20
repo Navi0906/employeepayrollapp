@@ -47,7 +47,7 @@ public class EmployeeController {
         return employeeService.deleteEmployee(id);
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Employee> updateEmployeeById(@PathVariable(value = "id") Long id,@Valid @RequestBody EmployeeDTO employeeDTO){
         logger.info("Successfully Updated Employee details with Id:{}", id);
         return employeeService.updateEmployee(id,employeeDTO);

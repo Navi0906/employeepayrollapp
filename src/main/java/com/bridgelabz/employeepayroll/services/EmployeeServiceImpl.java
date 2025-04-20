@@ -3,14 +3,13 @@ package com.bridgelabz.employeepayroll.services;
 import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
 import com.bridgelabz.employeepayroll.models.Employee;
 import com.bridgelabz.employeepayroll.repository.EmployeeRepository;
-import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +29,9 @@ public class EmployeeServiceImpl implements IEmployeeService{
         emp.setName(employeeDTO.getName());
         emp.setSalary(employeeDTO.getSalary());
         emp.setGender(employeeDTO.getGender());
+        emp.setDob(employeeDTO.getDob());
         emp.setDepartments(employeeDTO.getDepartments());
+
         employeeRepository.save(emp);
         log.info("Employee Created and Saved Successfully.");
         return new ResponseEntity<>(emp,HttpStatus.CREATED);
@@ -66,6 +67,10 @@ public class EmployeeServiceImpl implements IEmployeeService{
 
         log.debug("Updating gender for employee ID {}: {}", id, employeeDTO.getGender());
         emp.setGender(employeeDTO.getGender());
+
+        log.debug("Updating DOB for employee ID {}: {}", id, employeeDTO.getGender());
+        emp.setDob(employeeDTO.getDob());
+
 
         log.debug("Updating departments for employee ID {}: {}", id, employeeDTO.getDepartments());
         emp.setDepartments(employeeDTO.getDepartments());

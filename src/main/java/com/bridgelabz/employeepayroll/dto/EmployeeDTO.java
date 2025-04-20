@@ -1,8 +1,10 @@
 package com.bridgelabz.employeepayroll.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -24,6 +26,12 @@ public class EmployeeDTO {
     @NotNull(message = "department can not be null")
     @Size(min = 1, message = "At least one department must be specified")
     private List<String> departments;
+
+    @NotNull(message = "DOB cannot be null")
+    @Past(message = "must be in past")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//    It doesnt matter if u change input format DB will save in the yyyy-MM-dd format and we cant change that
+    private LocalDate dob;
 
 
 }
